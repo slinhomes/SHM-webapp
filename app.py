@@ -39,8 +39,9 @@ def insert_data(conn, data, image_data=None):
              VALUES (?, ?, ?, ?, ?, ?);'''
     cur = conn.cursor()
     cur.execute(sql, data + (image_data,))
+    lastrowid = cur.fetchone()[0]  # Fetches the ID of the last inserted row
     conn.commit()
-    return cur.lastrowid
+    return lastrowid
 
 # Function to convert image to binary format
 def convert_image_to_binary(image):
