@@ -35,12 +35,18 @@ def create_table(conn):
 
 # Function to insert data into the table
 def insert_data(conn, data, image_data=None):
-    sql = '''INSERT INTO property_inspection_data (asset_id, address, date, value, general_comments, image)
+    insert_sql = '''INSERT INTO property_inspection_data (asset_id, address, date, value, general_comments, image)
              VALUES (?, ?, ?, ?, ?, ?);'''
+    select_sql = '''SELECT SCOPE_IDENTITY();'''
+
     cur = conn.cursor()
-    cur.execute(sql, data + (image_data,))
-    lastrowid = cur.fetchone()[0]  # Fetches the ID of the last inserted row
+    cur.execute(insert_sql, data + (image_data,))
     conn.commit()
+
+    # Execute a separate query to fetch the last inserted ID
+    cur.execute(select_sql)
+    lastrowid = cur.fetchone()[0]  # Fetches the ID of the last inserted row
+
     return lastrowid
 
 # Function to convert image to binary format
