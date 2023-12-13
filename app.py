@@ -20,15 +20,16 @@ def create_connection():
 # Function to create a table (if it doesn't exist)
 def create_table(conn):
     try:
-        sql = '''CREATE TABLE IF NOT EXISTS property_inspection_data (
-                    id INTEGER PRIMARY KEY,
-                    asset_id TEXT,
-                    address TEXT,
-                    date TEXT,
-                    value REAL,
-                    general_comments TEXT,
-                    image VARBINARY(MAX)
-                 );'''
+        sql = '''CREATE TABLE [dbo].[property_inspection_data] (
+                [id]               INT             NOT NULL,
+                [asset_id]         NVARCHAR (50)   NULL,
+                [address]          NVARCHAR (50)   NULL,
+                [date]             DATE            NULL,
+                [value]            FLOAT (53)      NULL,
+                [general_comments] NVARCHAR (MAX)  NULL,
+                [image]            VARBINARY (MAX) NULL,
+                CONSTRAINT [PK_property_inspection_data] PRIMARY KEY CLUSTERED ([id] ASC)
+            );'''
         conn.execute(sql)
     except Exception as e:
         print(e)
