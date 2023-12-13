@@ -27,7 +27,7 @@ def create_table(conn):
                     date TEXT,
                     value REAL,
                     general_comments TEXT,
-                    image BLOB
+                    image VARBINARY(MAX)
                  );'''
         conn.execute(sql)
     except Exception as e:
