@@ -55,7 +55,7 @@ def main():
     create_table(conn)
 
     # Title of the app
-    st.header("Student Homes", divider='violet')
+    st.header("Student Homes MGMT", divider='violet')
     st.subheader("Property inspection data submission portal")
 
     # User input fields
