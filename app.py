@@ -51,8 +51,7 @@ def convert_image_to_binary(image):
 # Streamlit app
 def main():
     # Database connection
-    database = "webappDB.db"
-    conn = create_connection(database)
+    conn = create_connection()
     create_table(conn)
 
     # Title of the app
