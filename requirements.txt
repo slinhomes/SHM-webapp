@@ -1,1 +1,4 @@
 streamlit
+pyodbc
+dotenv
+os

@@ -1,20 +1,26 @@
 import streamlit as st
-import sqlite3
+import pyodbc
 from datetime import datetime
 
-# Function to connect to the SQLite database
-def create_connection(db_file):
-    conn = None
-    try:
-        conn = sqlite3.connect(db_file)
-    except Exception as e:
-        print(e)
+import os
+from dotenv import load_dotenv, find_dotenv
+_=load_dotenv(find_dotenv())
+
+# Function to connect to the Azure SQL database
+def create_connection():
+    server = 'studenthomesmgmt.database.windows.net'
+    database = 'PortfolioManagement'  
+    username = os.getenv('USERNAME')
+    password = os.getenv('PASSWORD')
+    driver = '{ODBC Driver 17 for SQL Server}'  # Adjust the driver if needed
+    conn = pyodbc.connect(
+        f'DRIVER={driver};SERVER={server};PORT=1433;DATABASE={database};UID={username};PWD={password}')
     return conn
 
 # Function to create a table (if it doesn't exist)
 def create_table(conn):
     try:
-        sql = '''CREATE TABLE IF NOT EXISTS property_data (
+        sql = '''CREATE TABLE IF NOT EXISTS property_inspection_data (
                     id INTEGER PRIMARY KEY,
                     asset_id TEXT,
                     address TEXT,
@@ -29,7 +35,7 @@ def create_table(conn):
 
 # Function to insert data into the table
 def insert_data(conn, data, image_data=None):
-    sql = '''INSERT INTO property_data (asset_id, address, date, value, general_comments, image)
+    sql = '''INSERT INTO property_inspection_data (asset_id, address, date, value, general_comments, image)
              VALUES (?, ?, ?, ?, ?, ?);'''
     cur = conn.cursor()
     cur.execute(sql, data + (image_data,))
