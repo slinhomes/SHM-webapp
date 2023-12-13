@@ -4,7 +4,7 @@ from datetime import datetime
 
 import os
 from dotenv import load_dotenv, find_dotenv
-_=load_dotenv(find_dotenv())
+load_dotenv(find_dotenv())
 
 myusername = os.getenv("USERNAME")
 print(myusername)
