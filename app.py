@@ -10,8 +10,8 @@ _=load_dotenv(find_dotenv())
 def create_connection():
     server = 'studenthomesmgmt.database.windows.net'
     database = 'PortfolioManagement'  
-    username = 'slin'
-    password = 'Sl2023!!'
+    username = os.getenv('USERNAME')
+    password = os.getenv('PASSWORD')
     driver = '{ODBC Driver 17 for SQL Server}'  # Adjust the driver if needed
     conn = pyodbc.connect(
         f'DRIVER={driver};SERVER={server};PORT=1433;DATABASE={database};UID={username};PWD={password}')
