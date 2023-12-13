@@ -21,14 +21,13 @@ def create_connection():
 def create_table(conn):
     try:
         sql = '''CREATE TABLE [dbo].[property_inspection_data] (
-                [id]               INT             NOT NULL,
+                [id]               INT             NULL,
                 [asset_id]         NVARCHAR (50)   NULL,
                 [address]          NVARCHAR (50)   NULL,
                 [date]             DATE            NULL,
                 [value]            FLOAT (53)      NULL,
                 [general_comments] NVARCHAR (MAX)  NULL,
-                [image]            VARBINARY (MAX) NULL,
-                CONSTRAINT [PK_property_inspection_data] PRIMARY KEY CLUSTERED ([id] ASC)
+                [image]            VARBINARY (MAX) NULL
             );'''
         conn.execute(sql)
     except Exception as e:
