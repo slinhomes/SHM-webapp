@@ -22,7 +22,8 @@ def check_password():
         "Password", type="password", on_change=password_entered, key="password"
     )
     if "password_correct" in st.session_state:
-        st.error("Password incorrect! \nPlease try again. Any issues, please contact slin@studenthomesmgmt.com")
+        st.error("Password incorrect! Please try again.")
+        st.error("Email slin@studenthomesmgmt.com to report any system error.")
     return False
 
 if not check_password():
