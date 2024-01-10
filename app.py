@@ -22,7 +22,7 @@ def check_password():
         "Password", type="password", on_change=password_entered, key="password"
     )
     if "password_correct" in st.session_state:
-        st.error("Password incorrect! Please try again.")
+        st.error("Password incorrect! \nPlease try again. Any issues, please contact slin@studenthomesmgmt.com")
     return False
 
 if not check_password():
